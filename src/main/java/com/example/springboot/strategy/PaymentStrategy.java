@@ -2,8 +2,15 @@ package com.example.springboot.strategy;
 
 import com.example.springboot.model.PaymentRequest;
 
+/**
+ * The Strategy Interface for the Strategy Design Pattern.
+ * Requirement 7.1
+ */
 public interface PaymentStrategy {
-    boolean validate(PaymentRequest details);
+    boolean validate(PaymentRequest request);
     String process(double amount);
-    String getMethodName(); //To identify the strategy
+    
+    default String getMethodName() {
+        return "GENERIC";
+    }
 }
