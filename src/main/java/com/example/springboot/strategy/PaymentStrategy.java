@@ -1,22 +1,16 @@
 package com.example.springboot.strategy;
 
-import com.example.springboot.model.PaymentRequest; 
-import org.springframework.stereotype.Component;   
+import com.example.springboot.model.PaymentRequest;
 
-@Component("payPalStrategy") // Explicit bean name matches your bean list
-public class PayPalStrategy implements PaymentStrategy {
-
-    @Override
-    public boolean validate(PaymentRequest request) {
-        // Requirement 5.1.1: Validate email format
-        System.out.println("Validating PayPal email...");
-        return request.getEmail() != null && 
-               request.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$");
-    }
-
-    @Override
-    public String process(double amount) {
-        System.out.println("Processing PayPal payment for $" + amount);
-        return "SUCCESS"; 
+/**
+ * The Strategy Interface for the Strategy Design Pattern.
+ * Requirement 7.1
+ */
+public interface PaymentStrategy {
+    boolean validate(PaymentRequest request);
+    String process(double amount);
+    
+    default String getMethodName() {
+        return "GENERIC";
     }
 }

@@ -1,6 +1,10 @@
 com/example/springboot/model/PaymentType.class
+com/example/springboot/strategy/BankTransferStrategy.class
+com/example/springboot/service/AdminService.class
 com/example/springboot/factory/PaymentStrategyFactory.class
 com/example/springboot/model/PaymentRecord.class
+com/example/springboot/controller/AdminController.class
+com/example/springboot/model/PolicyManager.class
 com/example/springboot/HelloController.class
 com/example/springboot/strategy/PayPalStrategy.class
 com/example/springboot/model/Consultant.class
