@@ -32,23 +32,6 @@ Where: BookingState.java + BookingLifecycleService.java + Booking.java
 
 The State Pattern is used to model the booking lifecycle from Section 5. The BookingState enum defines all seven possible states a booking can be in (REQUESTED, CONFIRMED, PENDING_PAYMENT, PAID, REJECTED, CANCELLED, COMPLETED). The BookingLifecycleService acts as the state manager — it holds a static EnumMap<BookingState, Set<BookingState>> called TRANSITIONS that maps every state to the exact set of states it is allowed to move to. When any part of the system needs to change a booking's state, it must call BookingLifecycleService.transition(), which resolves the current state, checks the transition map, and either returns the new state or throws an IllegalStateException if the transition is illegal. The Booking model itself stores the current state as a String and exposes getState() and setState(), but all transition logic is externalized into BookingLifecycleService so that no invalid state change can bypass the rules. Terminal states (Rejected, Cancelled, Completed) map to empty sets, meaning once a booking reaches one of those states, it cannot transition any further. This pattern was chosen because the booking has clearly defined states with strict rules governing how it moves between them, which is exactly the problem the State Pattern is designed to solve.
 
-Client Booking Subsystem – File Structure (UC1, UC2, UC3)
-The files below implement the client-facing booking flow: browsing services, requesting a booking, and cancelling a booking, along with the full booking lifecycle defined in Section 5.
-
-src/main/java/com/example/springboot/
-├── model/
-│   ├── BookingState.java           <-- [Section 5] Enum defining all 7 booking lifecycle states
-│   ├── Booking.java                <-- [Core] The central booking entity linking client, consultant, and state
-│   ├── ConsultingServiceInfo.java  <-- [UC1] Model representing a browsable consulting service
-│   ├── BookingRequestDTO.java      <-- [UC2] DTO carrying the client's booking request data
-│   └── CancellationResult.java     <-- [UC3] DTO returned after a cancellation attempt
-├── service/
-│   ├── ConsultingServiceCatalogService.java  <-- [UC1] Manages the service catalogue and browse/filter logic
-│   ├── ClientBookingService.java             <-- [UC2/UC3] Core service for creating and cancelling bookings
-│   └── BookingLifecycleService.java          <-- [Section 5] Enforces legal state transitions for all bookings
-└── controller/
-    └── ClientController.java       <-- [UC1/UC2/UC3] REST API endpoints under /api/client
-
 
 
 Admin Subsystem Integration Status (UC11-UC12)
@@ -77,6 +60,25 @@ Applied Design Patterns (GoF) — Admin Subsystem
 
 
 To run the backend, navigate to the /backend directory and execute ./mvnw spring-boot:run.
+
+## Client Booking Subsystem – File Structure (UC1, UC2, UC3)
+
+The files below implement the client-facing booking flow: browsing services, requesting a booking, and cancelling a booking, along with the full booking lifecycle defined in Section 5.
+
+```text
+src/main/java/com/example/springboot/
+├── model/
+│   ├── BookingState.java                    <-- [Section 5] Enum defining all 7 booking lifecycle states
+│   ├── Booking.java                         <-- [Core] The central booking entity linking client, consultant, and state
+│   ├── ConsultingServiceInfo.java           <-- [UC1] Model representing a browsable consulting service
+│   ├── BookingRequestDTO.java               <-- [UC2] DTO carrying the client's booking request data
+│   └── CancellationResult.java              <-- [UC3] DTO returned after a cancellation attempt
+├── service/
+│   ├── ConsultingServiceCatalogService.java <-- [UC1] Manages the service catalogue and browse/filter logic
+│   ├── ClientBookingService.java            <-- [UC2/UC3] Core service for creating and cancelling bookings
+│   └── BookingLifecycleService.java         <-- [Section 5] Enforces legal state transitions for all bookings
+└── controller/
+    └── ClientController.java                <-- [UC1/UC2/UC3] REST API endpoints under /api/client
 
 
 
