@@ -33,8 +33,26 @@ Where: BookingState.java + BookingLifecycleService.java + Booking.java
 
 The State Pattern is used to model the booking lifecycle from Section 5. The BookingState enum defines all seven possible states a booking can be in (REQUESTED, CONFIRMED, PENDING_PAYMENT, PAID, REJECTED, CANCELLED, COMPLETED). The BookingLifecycleService acts as the state manager — it holds a static EnumMap<BookingState, Set<BookingState>> called TRANSITIONS that maps every state to the exact set of states it is allowed to move to. When any part of the system needs to change a booking's state, it must call BookingLifecycleService.transition(), which resolves the current state, checks the transition map, and either returns the new state or throws an IllegalStateException if the transition is illegal. The Booking model itself stores the current state as a String and exposes getState() and setState(), but all transition logic is externalized into BookingLifecycleService so that no invalid state change can bypass the rules. Terminal states (Rejected, Cancelled, Completed) map to empty sets, meaning once a booking reaches one of those states, it cannot transition any further. This pattern was chosen because the booking has clearly defined states with strict rules governing how it moves between them, which is exactly the problem the State Pattern is designed to solve.
 
+Consultant Subsystem (UC8 - UC10)
+Consultant subsytem backend logic is complete for the following:
+**UC8 (Manage Availability):** Consultants have a list of avalabilities and they are able to add and remove availbilties. Availabilty Factory is used to generate availability objects ensuring all availability instances are created in a consistent way. 
+**UC9 (Accept or Reject Booking Request):** When a Client requests a booking session, a booking request is made and sent to the consultant. The consultant is able to accept or reject the booking and the system uses an Observer pattern to notify clients of the booking state after. 
+**UC10 (Complete a Booking):** After a consulting session occurs, the consultant marks the booking as completed.
 
+src/main/java/com/example/springboot/
+├── model/
+│   ├── Consultant.java               <-- [UC8] Consultant Entity & Availability List
+│   ├── AvailabilityStatus.java       <-- [UC8] Enum: AVAILABLE, BOOKED, CANCELLED
+│   └── AvailabilityFactory.java             <-- [UC8] GoF Factory Pattern 
+├── observer/
+│   ├── BookingObserver.java             <-- [UC9 & UC10] Booking Logic Layer
+│   └── ClientNotificationObserver.java   <-- [UC9] Notifies Client of booking status
+├── service/
+│   ├── impl/
+│   ├── AvailabilityServiceImpl.java             <-- [UC8] Availability Logic Layer
+│   └── AvalabilityService.java           
 
+    
 Admin Subsystem Integration Status (UC11-UC12)
 
 Admin subsystem backend logic is complete for the following:
