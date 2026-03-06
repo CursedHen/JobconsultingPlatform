@@ -47,7 +47,7 @@ Consultant subsytem backend logic is complete for the following:
 **UC8 (Manage Availability):** Consultants have a list of avalabilities and they are able to add and remove availbilties. Availabilty Factory is used to generate availability objects ensuring all availability instances are created in a consistent way. 
 **UC9 (Accept or Reject Booking Request):** When a Client requests a booking session, a booking request is made and sent to the consultant. The consultant is able to accept or reject the booking and the system uses an Observer pattern to notify clients of the booking state after. 
 **UC10 (Complete a Booking):** After a consulting session occurs, the consultant marks the booking as completed.
-
+```text
 src/main/java/com/example/springboot/
 ├── model/
 │   ├── Consultant.java               <-- [UC8] Consultant Entity & Availability List
@@ -60,7 +60,7 @@ src/main/java/com/example/springboot/
 │   ├── impl/
 │   ├── AvailabilityServiceImpl.java             <-- [UC8] Availability Logic Layer
 │   └── AvalabilityService.java           
-
+```
     
 Admin Subsystem Integration Status (UC11-UC12)
 
