@@ -4,18 +4,24 @@ project participants: samantha murillo carmona: 221622816, Ephratah: ,Jonathan: 
 ```text
 src/main/java/com/example/springboot/
 ├── model/
-│   └── PaymentRequest.java        <-- [UC6] Secure Data Storage / DTOs
+│   ├── PaymentRequest.java        <-- [UC6] DTO for secure payment data transfer
+│   └── PaymentRecord.java         <-- [UC7] Entity for transaction auditing
 ├── strategy/
 │   ├── PaymentStrategy.java       <-- [Pattern] GoF Strategy Interface
-│   ├── CreditCardStrategy.java    <-- [UC5] Card Validation Logic
-│   ├── PayPalStrategy.java        <-- [UC5] PayPal Integration Logic
-│   └── BankTransferStrategy.java  <-- [UC5] Bank Transfer Logic
+│   ├── CreditCardStrategy.java    <-- [UC5] Encapsulated Card Validation logic
+│   ├── PayPalStrategy.java        <-- [UC5] Encapsulated PayPal logic
+│   └── BankTransferStrategy.java  <-- [UC5] Encapsulated Bank Transfer logic
+├── factory/
+│   └── PaymentStrategyFactory.java <-- [Pattern] Strategy Creation & Lookup
+├── observer/
+│   └── PaymentObserver.java       <-- [Pattern] Observer Interface for event-driven updates
 ├── service/
-│   ├── PaymentService.java        <-- [UC5] Payment Workflow Orchestration
-│   ├── PaymentMethodService.java  <-- [UC6] Payment Method CRUD Management
-│   └── BookingHistoryService.java <-- [UC4] Transaction History & Audit Logic
+│   ├── PaymentService.java        <-- [UC5] Subject: Orchestrates payment & notifies observers
+│   ├── PaymentMethodService.java  <-- [UC6] CRUD management for saved profiles
+│   └── PaymentHistoryService.java <-- [UC4/UC7] Observer: Automated async history logging
 └── repository/
-    └── BookingRepository.java     <-- Data Access Layer (JPA/Hibernate)
+    ├── PaymentRepository.java     <-- Persistent storage for Audit Logs
+    └── BookingRepository.java     <-- Data Access Layer for Booking retrieval
 ```
 
     ### 🛡️ Payment Subsystem Integration Status (UC4-UC7)
