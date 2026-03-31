@@ -44,17 +44,9 @@
 
 package com.example.springboot.model;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Consultant {
@@ -95,7 +87,6 @@ public class Consultant {
     public String getSpecialization() { return specialization; }
     public RegistrationStatus getStatus() { return status; }
     public Double getHourlyRate(){ return hourlyRate; }
-    public List<Availability> getAvailabilities() { return availabilities; }
 
     public void setStatus(RegistrationStatus status) { this.status = status; }
 
