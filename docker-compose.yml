@@ -28,22 +28,30 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    # Combine everything under ONE environment tag
     environment:
-      # Database Settings
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/job_consulting
       SPRING_DATASOURCE_USERNAME: username
       SPRING_DATASOURCE_PASSWORD: password
       SPRING_DATASOURCE_DRIVERCLASSNAME: org.postgresql.Driver
       SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
       SPRING_H2_CONSOLE_ENABLED: "false"
-      # AI Settings
       GROQ_API_KEY: ${GROQ_API_KEY}
     ports:
       - "8080:8080"
     networks:
       - spring-demo
     restart: unless-stopped
+
+
+  frontend:
+    container_name: job-consulting-frontend
+    build:
+      context: ./frontend/job-consulting-platform-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - spring-demo
 
 networks:
   spring-demo:
