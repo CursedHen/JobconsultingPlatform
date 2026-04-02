@@ -20,6 +20,19 @@ function App() {
       getServices().then(res => setServices(res.data)).catch(err => console.log(err));
     }
   }, [view]);
+  if (view === "admin") {
+    return (
+      <div style={{ padding: "20px" }}>
+        <button onClick={() => setView("login")} style={{ float: "right" }}>Logout</button>
+        <h1>Admin Control Panel</h1>
+        <SystemStatus />
+        <hr />
+        <ConsultantApproval />
+        <hr />
+        <PolicyManager />
+      </div>
+    );
+  }
 
   const handleSignup = async (e) => {
     e.preventDefault();
