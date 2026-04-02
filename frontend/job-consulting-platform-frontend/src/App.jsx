@@ -5,7 +5,6 @@ import Payment from "./payment";
 import SystemStatus from "./SystemStatus";
 import ConsultantApproval from "./ConsultantApproval";
 import PolicyManager from "./PolicyManager";
-import { suggestServices, loginAndSave, getConsultants, getServices } from "./api"; 
 
 function App() {
   const [view, setView] = useState("login");
@@ -45,22 +44,19 @@ function App() {
     }
   };
 
-  // --- VIEW: ADMIN (Teammate's Management Tools) ---
-  if (view === "admin") {
-    return (
-      <div style={{ padding: "20px" }}>
-        <button onClick={() => setView("login")} style={{ float: "right" }}>Logout</button>
-        <h1>Admin Control Panel</h1>
-        <SystemStatus />
-        <hr />
-        <ConsultantApproval />
-        <hr />
-        <PolicyManager />
-        <hr />
-        <Availability />
-      </div>
-    );
-  }
+      <SystemStatus />
+
+      <hr />
+
+      <ConsultantApproval />
+
+      <hr />
+
+      <PolicyManager />
+
+      <hr />
+
+      <Availability />
 
   // --- VIEW: DASHBOARD (Your Service & Payment Strategy) ---
   if (view === "dashboard") {
