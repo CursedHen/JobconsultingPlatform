@@ -5,6 +5,7 @@ import Payment from "./payment";
 import SystemStatus from "./SystemStatus";
 import ConsultantApproval from "./ConsultantApproval";
 import PolicyManager from "./PolicyManager";
+import { suggestServices, loginAndSave, getConsultants, getServices } from "./api";
 
 function App() {
   const [view, setView] = useState("login");
@@ -43,7 +44,7 @@ function App() {
       setAiResponse("AI Service Unavailable.");
     }
   };
-
+  <div>
       <SystemStatus />
 
       <hr />
@@ -57,6 +58,7 @@ function App() {
       <hr />
 
       <Availability />
+      </div>
 
   // --- VIEW: DASHBOARD (Your Service & Payment Strategy) ---
   if (view === "dashboard") {

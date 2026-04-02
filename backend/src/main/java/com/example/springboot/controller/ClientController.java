@@ -196,4 +196,9 @@ public class ClientController {
     public ResponseEntity<List<Consultant>> getAllConsultants() {
     return ResponseEntity.ok(catalogService.browseAllConsultants());
 }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Map<String, String> credentials) {
+    // Logic to save user or verify
+    return ResponseEntity.ok("User info saved successfully!");
+}
 }
