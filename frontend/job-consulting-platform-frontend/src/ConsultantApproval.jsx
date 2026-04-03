@@ -50,7 +50,7 @@ export default function ConsultantApproval() {
           <div key={c.id} style={{ border: "1px solid black", margin: "10px", padding: "10px" }}>
             <p><strong>Name:</strong> {c.name}</p>
             <p><strong>Email:</strong> {c.email}</p>
-            <p><strong>Specialty:</strong> {c.specialty}</p>
+            <p><strong>Specialty:</strong> {c.specialization}</p>
 
             <button onClick={() => handleApprove(c.id)}>Approve</button>
             <button onClick={() => handleReject(c.id)}>Reject</button>
