@@ -110,5 +110,37 @@ src/main/java/com/example/springboot/
     └── ClientController.java                <-- [UC1/UC2/UC3] REST API endpoints under /api/client
 ```
 
+## Admin Module – Jonathan Quijano
 
+### Overview
+Implemented the full Admin Dashboard for Phase 1 and Phase 2, covering all three admin use cases defined in the project specification.
+
+### Features Built
+- **Consultant Approval (UC11):** Admins can view all pending consultant registrations and approve or reject them individually.
+- **System Status:** Admins can view a live overview of platform stats including total consultants, pending approvals, total bookings, and total clients.
+- **Policy Manager (UC12):** Admins can view and update system-wide policies including cancellation window, refund percentage, base price, and notification settings.
+
+### Frontend Components
+| File | Description |
+|---|---|
+| `AdminDashboard.jsx` | Tab-based container for all admin views |
+| `ConsultantApproval.jsx` | Lists pending consultants with approve/reject actions |
+| `SystemStatus.jsx` | Displays live platform statistics |
+| `PolicyManager.jsx` | Form to view and update system policies |
+
+### How to Access
+1. Go to the login page
+2. Click **Admin Panel**
+3. Enter the admin password when prompted
+4. Navigate between tabs using the tab bar
+
+### Backend Endpoints Used
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/admin/pending-consultants` | Fetch pending consultant registrations |
+| POST | `/admin/approve/{id}` | Approve a consultant |
+| POST | `/admin/reject/{id}` | Reject a consultant |
+| GET | `/admin/status` | Fetch system statistics |
+| GET | `/admin/policies` | Fetch current system policies |
+| POST | `/admin/policies` | Save updated policy values |
 
