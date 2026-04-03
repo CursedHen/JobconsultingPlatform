@@ -1,6 +1,8 @@
 import AdminDashboard from "./AdminDashboard";
 import React, { useState, useEffect } from "react";
 import Payment from "./payment"; 
+import BecomeMentor from "./BecomeMentor";
+import MentorApplication from "./MentorApplication";
 import API, { 
   requestBooking,
   getMyBookings,
@@ -147,12 +149,23 @@ if (view === "admin") {
     );
   }
 
+  if (view === "mentor-benefits") {
+    return <BecomeMentor setView={setView} />;
+  }
+
+  if (view === "mentor-form") {
+    return <MentorApplication setView={setView} />;
+  }
+
   // --- DASHBOARD VIEW (USER FOCUS) ---
   return (
     <div style={styles.dashboardContainer}>
       <nav style={styles.navbar}>
         <span style={styles.logo}>JobConsulting.ai</span>
-        <button onClick={() => setView("login")} style={styles.logoutBtn}>Logout</button>
+        <div>
+          <button onClick={() => setView("mentor-benefits")} style={{ ...styles.navBtn, marginRight: "10px", backgroundColor: "#0984e3", color: "white", borderRadius: "20px", padding: "8px 16px", border: "none", cursor: "pointer", fontWeight: "bold" }}>Become a Consultant</button>
+          <button onClick={() => setView("login")} style={styles.logoutBtn}>Logout</button>
+        </div>
       </nav>
 
       <div style={styles.content}>

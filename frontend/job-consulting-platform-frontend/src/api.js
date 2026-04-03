@@ -22,4 +22,5 @@ export const processPayment = (paymentData) => API.post("/payments/process", pay
 export const requestBooking = (bookingData) => API.post("/client/bookings", bookingData);
 export const getMyBookings = (clientId) => API.get("/client/bookings", { params: { clientId } });
 export const getConsultants = () => API.get("/client/consultants");
+export const registerConsultant = (consultantData) => API.post("/admin/consultants/register", consultantData);
 export default API;
