@@ -1,3 +1,4 @@
+import AdminDashboard from "./AdminDashboard";
 import React, { useState, useEffect } from "react";
 import Payment from "./payment"; 
 import API, { 
@@ -87,14 +88,7 @@ function App() {
     alert("Booking failed: " + (err.response?.data?.error || err.message));
   }
 };
-{myBookings.map(b => (
-  <div key={b.id}>
-    <span>{b.serviceType} - {b.state}</span>
-    {b.state === "PENDING_PAYMENT" && (
-      <button onClick={() => setSelectedService(b)}>Pay Now</button>
-    )}
-  </div>
-))}
+
     const getStatusStyle = (state) => {
     switch (state) {
     case 'REQUESTED': 
@@ -108,6 +102,19 @@ function App() {
   }
 };
 
+if (view === "admin") {
+  return (
+    <div style={{ padding: "20px" }}>
+      <button 
+        onClick={() => setView("login")} 
+        style={{ marginBottom: "20px", padding: "8px 20px", background: "#d63031", color: "white", border: "none", borderRadius: "8px", cursor: "pointer" }}
+      >
+        ← Back to Login
+      </button>
+      <AdminDashboard />
+    </div>
+  );
+}
 
   // --- LOGIN VIEW ---
   if (view === "login") {
@@ -121,6 +128,20 @@ function App() {
             <input type="password" placeholder="Password" required style={styles.input} onChange={(e) => setCredentials({...credentials, password: e.target.value})} />
             <button type="submit" style={styles.primaryBtn}>Enter Platform</button>
           </form>
+          <button
+            onClick={() => {
+            const pwd = prompt("Enter admin password:");
+            if (pwd === "admin123") {
+            setView("admin");
+            } else {
+            alert("Incorrect password");
+            }
+          }}
+            style={{ marginTop: "15px", padding: "10px 20px", background: "#2d3436", color: "white", border: "none", borderRadius: "8px", cursor: "pointer", width: "100%" }}
+
+          >
+          Admin Panel
+        </button>
         </div>
       </div>
     );
