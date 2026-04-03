@@ -10,13 +10,13 @@ export const signupUser = (userData) => API.post("/auth/signup", userData);
 export const loginAndSave = (credentials) => API.post("/client/login", credentials);
 
 export const getServices = () => API.get("/client/services");
-export const getPendingConsultants = () => API.get("/admin/pending-consultants");
-export const approveConsultant = (id) => API.post(`/admin/approve/${id}`);
+export const getPendingConsultants = () => API.get("/admin/consultants/pending");
+export const approveConsultant = (id) => API.put(`/admin/consultants/${id}/approve`);
+export const rejectConsultant = (id) => API.put(`/admin/consultants/${id}/reject`);
 
-export const rejectConsultant = (id) => API.post(`/admin/reject/${id}`);
 export const getSystemStatus = () => API.get("/admin/status");
 export const getPolicies = () => API.get("/admin/policies");
-export const savePolicies = (policies) => API.put("/admin/policies", policies);
+export const savePolicies = (policy) => API.post("/admin/policies", policy);
 
 export const processPayment = (paymentData) => API.post("/payments/process", paymentData);
 export const requestBooking = (bookingData) => API.post("/client/bookings", bookingData);
